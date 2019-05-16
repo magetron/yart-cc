@@ -5,7 +5,7 @@
 class vec3 {
 	public:
 		vec3() {}
-		vec3(float e0, float e1, float e2) {
+		vec3(double e0, double e1, double e2) {
 			e[0] = e0;
 			e[1] = e1;
 			e[2] = e2;
@@ -20,8 +20,8 @@ class vec3 {
 
 		inline const vec3& operator + () const {	return *this;	}
 		inline vec3 operator ~ () const {	return vec3(-e[0], -e[1], -e[2]); 	}
-		inline float operator [] (int i) const {	return e[i];	}
-		inline float& operator [] (int i) {	return e[i];	};
+		inline double operator [] (int i) const {	return e[i];	}
+		inline double& operator [] (int i) {	return e[i];	};
 
 		inline vec3& operator += (const vec3 &v2);
 		inline vec3& operator -= (const vec3 &v2);
@@ -91,7 +91,7 @@ inline double dot (const vec3 &v1, const vec3 &v2) {
 }
 
 inline vec3 cross (const vec3 &v1, const vec3 &v2) {
-	return vec3(	(v1.e[1] * v2.e[2] - v1.e[2] * v2.e[1]),	(- v1.e[0] * v2.e[2] + v1.e[2] * v2.e[0])),		(v1.e[0] * v2.e[1] - v1.e[1] * v2.e[0])	);
+	return vec3(	(v1.e[1] * v2.e[2] - v1.e[2] * v2.e[1]),	(-v1.e[0] * v2.e[2] + v1.e[2] * v2.e[0]),	(v1.e[0] * v2.e[1] - v1.e[1] * v2.e[0])	);
 }
 
 inline vec3& vec3::operator += (const vec3 &v) {
@@ -124,10 +124,10 @@ inline vec3& vec3::operator /= (const vec3 &v) {
 }
 
 inline vec3& vec3::operator /= (const double t) {
-	float n = 1.0 / t;
-	e[0] *= k;
-	e[1] *= k;
-	e[2] *= k;
+	double n = 1.0 / t;
+	e[0] *= n;
+	e[1] *= n;
+	e[2] *= n;
 	return *this;
 }
 

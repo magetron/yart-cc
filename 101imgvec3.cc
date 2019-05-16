@@ -1,7 +1,8 @@
 #include <iostream>
+#include "vec3.h"
 
 int main () {
-	freopen("101img.ppm", "w", stdout);
+	freopen("101imgvec3.ppm", "w", stdout);
 	
 	int nx = 200;
 	int ny = 100;
@@ -10,12 +11,10 @@ int main () {
 
 	for (int j = ny - 1; j >= 0; j--) {
 		for (int i = 0; i < nx; i++) {
-			float r = float(i) / float(nx);
-			float g = float(j) / float(ny);
-			float b = 0.2;
-			int ir = int(255.99*r);
-			int ig = int(255.99*g);
-			int ib = int(255.99*b);
+			vec3 col (double(i) / double(nx), double(j) / double(ny), 0.2);
+			int ir = int(255.99*col[0]);
+			int ig = int(255.99*col[1]);
+			int ib = int(255.99*col[2]);
 			std::cout << ir << " " << ig << " " << ib << "\n";
 		}
 	}
