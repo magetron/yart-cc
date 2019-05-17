@@ -1,13 +1,15 @@
+#ifndef HITTABLELISTH
+#define HITTABLELISTH
 #include "hittable.h"
 
 class hittable_list: public hittable {
 	public :
 		hittable_list () { }
-		hittable_list (hittable **l, int n) {	list = 1;	list_size = n; 	}
+		hittable_list (hittable **l, int n) {	list = l;	list_size = n; 	}
 		virtual bool hit (const ray& r, double tmin, double tmax, hit_record& rec) const;
 		hittable **list;
 		int list_size;
-}
+};
 
 bool hittable_list::hit (const ray& r, double t_min, double t_max, hit_record& rec) const {
 	hit_record tmp_rec;
@@ -21,6 +23,8 @@ bool hittable_list::hit (const ray& r, double t_min, double t_max, hit_record& r
 		}
 	return hit_anything;
 }
+
+#endif
 
 
 
