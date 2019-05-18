@@ -1,6 +1,6 @@
 # Raytracer-CPP
 
-* Incredibly trivial ray-tracer written in plain, understandable C++
+Incredibly trivial ray-tracer written in plain, understandable C++
 
 ## Showcase
 
