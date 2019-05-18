@@ -1,8 +1,9 @@
 #ifndef MATERIALH
 #define MATERIALH
 
-#include "ray.h"
 #include "hittable.h"
+
+struct hit_record;
 
 class material {
 	public:
