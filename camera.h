@@ -5,15 +5,21 @@
 
 class camera {
 	public:
-		camera (double vfov, double aspect) {
+		camera (vec3 look_from, vec3 look_at, vec3 vup, double vfov, double aspect) {
+			vec3 u, v, w;
 			double theta = vfov * M_PI / 180;
 			double half_height = tan(theta / 2);
 			double half_width = aspect * half_height;
 
+			origin = look_from;
+			w = unit_vector(look_from - look_at);
+			u = unit_vector(cross(vup, w));
+			v = cross(w, u);
+
 			lower_left_corner = vec3(-half_width, -half_height, -1.0);
-			horizontal = vec3(2 * half_width, 0.0, 0.0);
-			vertical = vec3(0.0, 2 * half_height, 0.0);
-			origin = vec3(0.0, 0.0, 0.0);
+			lower_left_corner = origin - half_width * u - half_height * v - w;
+			horizontal = 2 * u * half_width;
+			vertical = 2 * v * half_height;
 		
 		}
 
