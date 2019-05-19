@@ -27,7 +27,7 @@ class dielectric : public material {
 			vec3 outward_normal;
 			vec3 reflected = reflect(r_in.direction(), rec.normal);
 			double ni_over_nt;
-			attenuation = vec3(1.0, 1.0, 0.0);
+			attenuation = vec3(1.0, 1.0, 1.0);
 			vec3 refracted;
 			double reflect_prob;
 			double cosine;
