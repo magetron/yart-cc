@@ -33,7 +33,7 @@ int main () {
 
 	std::cout << "P3\n" << nx << " " << ny << "\n255\n";
 
-	camera cam;
+	camera cam(vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, -1.0), vec3(0, 1, 0), 90, double(nx) / double(ny)) ;
 
 	hittable *list[5];
 	list[0] = new sphere(vec3(0, 0, -1), 0.5, new lambertian(vec3(0.1, 0.2, 0.5)));
