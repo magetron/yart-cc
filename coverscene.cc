@@ -55,7 +55,7 @@ int main () {
 
 	int nx = 2000;
 	int ny = 1000;
-	int ns = 10;
+	int ns = 100;
 
 	std::cout << "P3\n" << nx << " " << ny << "\n255\n";
 
