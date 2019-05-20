@@ -9,4 +9,4 @@ generate:
 
 clean:
 	@rm -rf *.ppm
-
+	@rm -rf *.out
