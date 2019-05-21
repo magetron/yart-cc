@@ -85,8 +85,8 @@ int main () {
 	freopen("coverscene-mt.ppm", "w", stdout);
 
 	int nx = 2000;
-	int ny = 1200;
-	int ns = 10;
+	int ny = 1000;
+	int ns = 100;
 	int max_thread = 8; // please note: max_thread shall always be a divisor of ny
 
 	std::cout << "P3\n" << nx << " " << ny << "\n255\n";
