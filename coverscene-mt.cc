@@ -85,9 +85,9 @@ int main () {
 	freopen("coverscene-mt.ppm", "w", stdout);
 
 	int nx = 2000;
-	int ny = 1000;
-	int ns = 100;
-	int max_thread = 4;
+	int ny = 1200;
+	int ns = 10;
+	int max_thread = 8; // please note: max_thread shall always be a divisor of ny
 
 	std::cout << "P3\n" << nx << " " << ny << "\n255\n";
 
@@ -104,19 +104,12 @@ int main () {
 	int ***output_img = new int** [ny];
 	
 	int thread_interval = ny / max_thread;
-	std::thread threads[max_thread + 1];
+	std::thread threads[max_thread];
 	int thread_counter = 0;
-	
+	for (int i = 0; i < max_thread; i++) 
+		threads[i] = std::thread(renderer, nx, ny, ns, (i + 1) * thread_interval - 1, i * thread_interval, 0, nx - 1, cam, world, output_img);
 
-	std::thread t0(renderer, nx, ny, ns, ny - 1, ny / 4 * 3, 0, nx - 1, cam, world, output_img);
-	std::thread t1(renderer, nx, ny, ns, ny / 4 * 3 - 1, ny / 2, 0, nx - 1, cam, world, output_img);
-	std::thread t2(renderer, nx, ny, ns, ny / 2 - 1, ny / 4, 0, nx - 1, cam, world, output_img);
-	std::thread t3(renderer, nx, ny, ns, ny / 4 - 1, 0, 0, nx - 1, cam, world, output_img);
-	t0.join();
-	t1.join();
-	t2.join();
-	t3.join();
-
+	for (int i = 0; i < max_thread; i++) threads[i].join();
 
 	for (int j = ny - 1; j >= 0; j--) 
 		for (int i = 0; i < nx; i++) 
