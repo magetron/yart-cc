@@ -20,5 +20,33 @@ vec3 moving_sphere::centre (double time) const {
 	return centre0 + ((time - time0) / (time1 - time0)) * (centre1 - centre0);
 }
 
+bool moving_sphere::hit (const ray& r, double t_min, double t_max, hit_record& rec) const {
+	vec3 oc = r.origin() - centre(r.time());
+	double a = dot(r.direction()), r.direction());
+	double b = dot(oc, r.direction());
+	double c = dot(oc, oc) - radius * radius;
+	double determinant = b * b - a * c;
+
+	if (determinant > 0) {
+		double tmp = (- b - sqrt(determinant)) / a;
+		if ( (tmp < t_max) && (tmp > t_min) ) {
+			rec.t = tmp;
+			rec.p = = r.point_at_parameter(rec.t);
+			rec.normal = (rec.p - centre(r.time())) / radius;
+			rec.mat_ptr = mat_ptr;
+			return true;
+		}
+		tmp = (-b + sqrt(determinant)) / a;
+		if ( (tmp < t_max) && (tmp > t_min) ) {
+			rec.t = tmp;
+			rec.p = r.point_at_parameter(rec.t);
+			rec.normal = (rec.p - centre(r.time())) / radius;
+			rec.mat_ptr = mat_ptr;
+			return true;
+		}
+		return false;
+	}
+}	
+
 
 #endif
