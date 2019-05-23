@@ -1,11 +1,19 @@
 CC = clang++
-CFLAGS = -O3
+CFLAGS = -std=c++11 -O3
 
-coverscene: coverscene.cc
+cover: coverscene.cc
 	${CC} ${CFLAGS} coverscene.cc -o coverscene.out
 
-generate:
+cover-mb: coverscene-motionblur.cc
+	${CC} ${CFLAGS} coverscene-motionblur.cc -o coverscene-motionblur.out
+
+gen-cover:
+	@make cover
 	@./coverscene.out
+
+gen-cover-mb:
+	@make cover-mb
+	@./coverscene-motionblur.out
 
 clean:
 	@rm -rf *.ppm
