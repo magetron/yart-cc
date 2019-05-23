@@ -1,6 +1,8 @@
 #ifndef MOVING_SPHEREH
 #define MOVING_SPHEREH
 
+#include "hittable.h"
+
 class moving_sphere : public hittable {
 	public :
 		moving_sphere () { }
@@ -22,7 +24,7 @@ vec3 moving_sphere::centre (double time) const {
 
 bool moving_sphere::hit (const ray& r, double t_min, double t_max, hit_record& rec) const {
 	vec3 oc = r.origin() - centre(r.time());
-	double a = dot(r.direction()), r.direction());
+	double a = dot(r.direction(), r.direction());
 	double b = dot(oc, r.direction());
 	double c = dot(oc, oc) - radius * radius;
 	double determinant = b * b - a * c;
@@ -31,7 +33,7 @@ bool moving_sphere::hit (const ray& r, double t_min, double t_max, hit_record& r
 		double tmp = (- b - sqrt(determinant)) / a;
 		if ( (tmp < t_max) && (tmp > t_min) ) {
 			rec.t = tmp;
-			rec.p = = r.point_at_parameter(rec.t);
+			rec.p = r.point_at_parameter(rec.t);
 			rec.normal = (rec.p - centre(r.time())) / radius;
 			rec.mat_ptr = mat_ptr;
 			return true;
@@ -44,8 +46,8 @@ bool moving_sphere::hit (const ray& r, double t_min, double t_max, hit_record& r
 			rec.mat_ptr = mat_ptr;
 			return true;
 		}
-		return false;
 	}
+	return false;
 }	
 
 
