@@ -1,7 +1,7 @@
 #ifndef MOVING_SPHEREH
 #define MOVING_SPHEREH
 
-#include "hittable.h"
+#include "../hittable.h"
 
 class moving_sphere : public hittable {
 	public :

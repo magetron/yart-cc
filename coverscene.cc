@@ -1,13 +1,14 @@
 #include <iostream>
 #include <cfloat>
 
-#include "sphere.h"
-#include "hittablelist.h"
-#include "camera.h"
+#include "headers/objects/sphere.h"
+#include "headers/objects/moving_sphere.h"
+#include "headers/hittablelist.h"
+#include "headers/camera.h"
 
-#include "lambertian.h"
-#include "metal.h"
-#include "dielectric.h"
+#include "headers/materials/lambertian.h"
+#include "headers/materials/metal.h"
+#include "headers/materials/dielectric.h"
 
 
 hittable *random_sphere_scene () {

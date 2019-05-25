@@ -1,5 +1,6 @@
 #ifndef HITTABLELISTH
 #define HITTABLELISTH
+
 #include "hittable.h"
 
 class hittable_list: public hittable {

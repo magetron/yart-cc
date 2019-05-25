@@ -2,14 +2,14 @@
 #include <cfloat>
 #include <thread>
 
-#include "sphere.h"
-#include "moving_sphere.h"
-#include "hittablelist.h"
-#include "camera.h"
+#include "headers/objects/sphere.h"
+#include "headers/objects/moving_sphere.h"
+#include "headers/hittablelist.h"
+#include "headers/camera.h"
 
-#include "lambertian.h"
-#include "metal.h"
-#include "dielectric.h"
+#include "headers/materials/lambertian.h"
+#include "headers/materials/metal.h"
+#include "headers/materials/dielectric.h"
 
 
 hittable *random_sphere_scene () {
@@ -91,7 +91,7 @@ int main () {
 	int nx = 2000;
 	int ny = 1000;
 	int ns = 100;
-	int max_thread = 5; // please note: max_thread shall always be a divisor of ny
+	int max_thread = 8; // please note: max_thread shall always be a divisor of ny
 
 	std::cout << "P3\n" << nx << " " << ny << "\n255\n";
 

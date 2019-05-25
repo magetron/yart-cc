@@ -1,7 +1,7 @@
 #ifndef MATERIALH
 #define MATERIALH
 
-#include "hittable.h"
+#include "../hittable.h"
 
 struct hit_record;
 
