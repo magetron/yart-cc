@@ -1,4 +1,4 @@
-# Raytracer-CPP
+# Yet Another Ray Tracer
 
 Incredibly trivial ray-tracer written in plain, understandable C++
 
