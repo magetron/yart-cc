@@ -25,6 +25,20 @@ bool hittable_list::hit (const ray& r, double t_min, double t_max, hit_record& r
 	return hit_anything;
 }
 
+bool hittable_list::bounding_box (double t0, double t1, aabb& box) const {
+	if (list_size < 1) return false;
+	aabb tmp_box;
+	bool true1 = list[0] -> bounding_box(t0, t1, tmp_box);
+	if (!true1) return false;
+	else box = tmp_box;
+
+	for (int i = 1; i < list_size; i++) 
+		if (list[0] -> bounding_box(t0, t1, tmp_box)) box = surrounding_box(box, tmp_box);
+		else return false;
+	
+	return true;
+}
+
 #endif
 
 
