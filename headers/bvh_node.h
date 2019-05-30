@@ -9,12 +9,41 @@ class bvh_node : public hittable {
 		bvh_node (hittable **l, int n, double time0, double time1);
 
 		virtual bool hit (const ray& r, double tmin, double tmax, hit_record& rec) const;
-		virtual bool bouding_box (double t0, double t1, aabb& box) const;
+		virtual bool bounding_box (double t0, double t1, aabb& box) const;
 
 		hittable *left;
-		hittalbe *right;
+		hittable *right;
 		aabb box;
 };
+
+
+int box_x_cmp (const void* a, const void* b) {
+	aabb box_left, box_right;
+	hittable *ah = *(hittable **) a;
+	hittable *bh = *(hittable **) b;
+
+	if (!ah -> bounding_box(0, 0, box_left) || !bh -> bounding_box(0, 0, box_right))
+		std:cerr << "no bounding box in bvh_node constructor\n";
+	if (box_left.min().x() - box_right.min().x() < 0.0) return -1; else return 1;
+}
+
+
+bvh_node :: bvh_node (hittable **l, int n, double time0, double time1) {
+	int axis = int(3 * drand48());
+	if	 	(axis == 0) qsort(l, n, sizeof(hittable *), box_x_cmp);
+	else if (axis == 1) qsort(l, n, sizeof(hittable *), box_y_cmp);
+	else 				qsort(l, n, sizeof(hittable *), box_z_cmp);
+
+	if 		(n == 1) left = right = l[0];
+	else if (n == 2) { left = l[0]; right = l[1]; }
+	else 			 { left = new bvh_node(l, n / 2, time0, time1);
+					   right = new bvh_node(l + n / 2, n - n / 2, time0, time1); }
+
+	aabb box_left, box_right;
+	if (!left -> bounding_box(time0, time1, box_left) || !right -> bounding_box(time0, time1, box_right))
+		std::cerr << "no bounding box in bvh_node constructor\n";
+	box = surrounding_box(box_left, box_right);
+}
 
 bool bvh_node::hit (const ray& r, double t_min, double t_max, hit_record& rec) const {
 	if (box.hit(r, t_min, t_max)) {
