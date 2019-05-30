@@ -1,3 +1,6 @@
+#ifndef AABBH
+#define AABBH
+
 inline double dmin (double a, double b) { return a < b ? a : b; }
 inline double dmax (double a, double b) { return a > b ? a : b; }
 
@@ -43,3 +46,5 @@ inline bool aabb::hit (const ray&r , double tmin, double tmax) const {
 	}
 	return true;
 }
+
+#endif
