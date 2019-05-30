@@ -50,5 +50,4 @@ bool moving_sphere::hit (const ray& r, double t_min, double t_max, hit_record& r
 	return false;
 }	
 
-
 #endif
