@@ -1,7 +1,7 @@
 #ifndef DIELECTRICH
 #define DIELECTRICH
 
-#include "material.h"
+#include "../material.h"
 
 double schlick_approx (double cosine, double ref_idx) {
 	double r0 = (1 - ref_idx) / (1 + ref_idx);
