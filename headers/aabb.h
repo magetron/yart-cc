@@ -22,7 +22,7 @@ class aabb {
 				tmin = dmax(t0, tmin);
 				tmax = dmin(t1, tmax);
 
-				if (tmax <= tmin) return flase;
+				if (tmax <= tmin) return false;
 			}
 			return true;
 		}
@@ -31,20 +31,14 @@ class aabb {
 		vec3 _max;
 };
 
-inline bool aabb::hit (const ray&r , double tmin, double tmax) const {
-	for (int i =0; i < 3; i++) {
-		double invD = 1.0 / r.direction()[i];
-		double t0 = (min()[i] - r.origin()[i]) * invD;
-		double t1 = (max()[i] - r.origin()[i]) * invD;
-
-		if (invD < 0.0) std::swap(t0, t1);
-
-		tmin = t0 > tmin ? t0 : tmin;
-		tmax = t1 < tmax ? t1 : tmax;
-		
-		if (tmax <= tmin) return false;
-	}
-	return true;
+aabb surrounding_box (aabb box0, aabb box1) {
+	vec3 small( dmin(box0.min().x(), box1.min().x()),
+				dmin(box0.min().y(), box1.min().y()),
+				dmin(box0.min().z(), box1.min().z()) );
+	vec3 big  ( dmax(box0.max().x(), box1.max().x()),
+				dmax(box0.max().y(), box1.max().y()),
+				dmax(box0.max().z(), box1.max().z()) );
+	return aabb(small, big);
 }
 
 #endif
