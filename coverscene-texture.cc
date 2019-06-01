@@ -25,7 +25,7 @@ hittable *random_sphere_scene () {
 			double c_mat = drand48();
 			vec3 centre(a + 0.9 * drand48(), 0.2, b + 0.9 * drand48());
 			if ( (centre - vec3(4.0, 0.2, 0.0)).length() > 0.9 ) {
-				if (c_mat < 0.8) 		list[i ++] = new sphere(centre, 0.2, new lambertian(vec3(drand48() * drand48(), drand48() * drand48(), drand48() * drand48())));
+				if (c_mat < 0.8) 		list[i ++] = new sphere(centre, 0.2, new lambertian(new constant_texture(vec3(drand48() * drand48(), drand48() * drand48(), drand48() * drand48()))));
 				else if (c_mat < 0.95) 	list[i ++] = new sphere(centre, 0.2, new metal(vec3(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48()));
 				else					list[i ++] = new sphere(centre, 0.2, new dielectric(1.5));
 
@@ -33,7 +33,7 @@ hittable *random_sphere_scene () {
 		}
 	
 	list[i ++] = new sphere(vec3(0, 1, 0), 1.0, new dielectric(1.5));
-	list[i ++] = new sphere(vec3(-4, 1, 0), 1.0, new lambertian(vec3(0.4, 0.2, 0.1)));
+	list[i ++] = new sphere(vec3(-4, 1, 0), 1.0, new lambertian(new constant_texture(vec3(0.4, 0.2, 0.1))));
 	list[i ++] = new sphere(vec3(4, 1, 0), 1.0, new metal(vec3(0.7, 0.6, 0.5), 0.0));
 
 	return new hittable_list(list, i);
@@ -86,7 +86,7 @@ void renderer (int nx, int ny, int ns, int j_max, int j_min, int i_min, int i_ma
 
 
 int main () {
-	freopen("coverscene-mt.ppm", "w", stdout);
+	freopen("coverscene-texture.ppm", "w", stdout);
 
 	int nx = 2000;
 	int ny = 1000;
@@ -99,7 +99,7 @@ int main () {
  	vec3 look_at(0, 0, 0);
 	double dist = (look_from - look_at).length();
 	double aperture = 0.0;
-	camera cam(look_from, look_at, vec3(0.0, 1.0, 0.0), 20, double(nx) / double(ny), aperture, dist);
+	camera cam(look_from, look_at, vec3(0.0, 1.0, 0.0), 20, double(nx) / double(ny), aperture, dist, 0.0, 0.0);
 
 	double R = cos(M_PI / 4);
 
