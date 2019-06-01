@@ -4,7 +4,7 @@
 
 #include "headers/objects/sphere.h"
 #include "headers/objects/moving_sphere.h"
-#include "headers/hittablelist.h"
+#include "headers/hittable_list.h"
 #include "headers/camera.h"
 
 #include "headers/materials/lambertian.h"

@@ -2,7 +2,7 @@
 #include <cfloat>
 #include <thread>
 
-#include "headers/hittablelist.h"
+#include "headers/hittable_list.h"
 #include "headers/camera.h"
 
 #include "headers/objects/sphere.h"
