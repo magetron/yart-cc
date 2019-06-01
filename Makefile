@@ -10,6 +10,9 @@ cover-mb: coverscene-motionblur.cc
 cover-mt: coverscene-mt.cc
 	${CC} ${CFLAGS} coverscene-mt.cc -o coverscene-mt.out
 
+cover-tx: coverscene-texture.cc
+	${CC} ${CFLAGS} coverscene-texture.cc -o coverscene-texture.out
+
 gen-cover:
 	@make cover
 	@./coverscene.out
@@ -21,6 +24,10 @@ gen-cover-mb:
 gen-cover-mt:
 	@make cover-mt
 	@./coverscene-mt.out
+
+gen-cover-tx:
+	@make cover-tx
+	@./coverscene-texture.out
 
 clean:
 	@rm -rf *.ppm
