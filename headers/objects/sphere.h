@@ -8,6 +8,7 @@ class sphere: public hittable {
 		sphere () { }
 		sphere (vec3 cen, double r, material *m) : centre(cen), radius(r), mat_ptr(m)	{ } ;
 		virtual bool hit (const ray& r, double tmin, double tmax, hit_record& rec) const;
+		virtual bool bounding_box (double t0, double t1, aabb& box) const;
 		vec3 centre;
 		double radius;
 		material *mat_ptr;
