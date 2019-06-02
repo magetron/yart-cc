@@ -1,7 +1,6 @@
 #ifndef PERLINH
 #define PERLINH
 
-#include "../vec3.h"
 #include "../swap.h"
 
 class perlin {
@@ -18,20 +17,20 @@ class perlin {
 			return ranfloat[perm_x[i] ^ perm_y[j] ^ perm_z[k]];
 		}
 
-		static float* 	ranfloat;
+		static double* 	ranfloat;
 		static int*	perm_x;
 		static int*	perm_y;
 		static int* perm_z;
 };
 
-static float* perlin_generate () {
-	double* p = new float[256]; 
+static double* perlin_generate () {
+	double* p = new double[256]; 
 	for (int i = 0; i < 256; i++) p[i] = drand48();
 	return p;
 }
 
 void permute (int *p, int n) {
-	for (int i = n - 1; i > 0 i--) {
+	for (int i = n - 1; i > 0; i--) {
 		int target = int(drand48() * (i + 1));
 		swap(p[i], p[target]);
 	}
