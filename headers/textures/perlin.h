@@ -3,18 +3,38 @@
 
 #include "../swap.h"
 
+inline double trilinear_interp (double c[2][2][2], double u, double v, double w) {
+	double accum = 0;
+	for (int i = 0; i < 2; i++)
+		for (int j = 0; j < 2; j++)
+			for (int k = 0; k < 2; k++)
+				accum += (i * u + (1 - i) * (1 - u)) * (j * v + (1 - j) * (1 - v)) *(k * w + (1 - k) * (1 - w)) * c[i][j][k];
+	return accum;
+}
+
 class perlin {
 	public :
 		double noise (const vec3& p) const {
 			double u = p.x() - floor(p.x());
 			double v = p.y() - floor(p.y());
 			double w = p.z() - floor(p.z());
-
-			int i = int(4 * p.x()) & 255;
-			int j = int(4 * p.y()) & 255;
-			int k = int(4 * p.z()) & 255;
 			
-			return ranfloat[perm_x[i] ^ perm_y[j] ^ perm_z[k]];
+			u = (u * u) * (3 - 2 * u);
+			v = (v * v) * (3 - 2 * v);
+			w = (w * w) * (3 - 2 * w);
+
+			int i = floor(p.x());
+			int j = floor(p.y());
+			int k = floor(p.z());
+
+			double c[2][2][2];
+
+			for (int ii = 0; ii < 2; ii++)
+				for (int jj = 0; jj < 2; jj++)
+					for (int kk = 0; kk < 2; kk++)
+						c[ii][jj][kk] = ranfloat[perm_x[(i + ii) & 255] ^ perm_y[(j + jj) & 255] ^ perm_z[(k + kk) & 255]];
+				
+			return trilinear_interp(c, u, v, w);
 		}
 
 		static double* 	ranfloat;
