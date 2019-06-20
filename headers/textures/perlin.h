@@ -52,6 +52,18 @@ class perlin {
 			return perlin_interp(c, u, v, w);
 		}
 
+		double turb (const vec3& p, int depth = 7) const {
+			double accum = 0;
+			vec3 tmp_p = p;
+			double weight = 1.0;
+			for (int i = 0; i < depth; i++) {
+				accum += weight * noise(tmp_p);
+				weight *= 0.5;
+				tmp_p = tmp_p * 2;
+			}
+			return fabs(accum);
+		}
+
 		static vec3* ranvec;
 		static int*	perm_x;
 		static int*	perm_y;
