@@ -1,14 +1,17 @@
 #ifndef IMAGE_TEXTURE
 #define IMAGE_TEXTURE
 
+#include "../texture.h"
+
 class image_texture : public texture {
 	public :
 		image_texture () {}
-		image_texture (unsigned char* pixels, int A, int b) : data(pixels), nx(A), ny(B) { }
-		virutal vec3 value (double u, double v, const vec3& p) const;
+		image_texture (unsigned char* pixels, int A, int B) : data(pixels), nx(A), ny(B) { }
+		virtual vec3 value (double u, double v, const vec3& p) const;
 		unsigned char *data;
 		int nx, ny;
 };
+
 
 vec3 image_texture :: value (double u, double v, const vec3& p) const {
 	int i = u * nx;
@@ -24,7 +27,5 @@ vec3 image_texture :: value (double u, double v, const vec3& p) const {
 
 	return vec3(r, g, b);
 }
-
-
 
 #endif
