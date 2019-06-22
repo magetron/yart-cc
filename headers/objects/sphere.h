@@ -14,6 +14,13 @@ class sphere: public hittable {
 		material *mat_ptr;
 };
 
+void get_sphere_uv (const vec3& p, double& u, double& v) {
+	double phi = atan2(p.z(), p.x());
+	double theta = asin(p.y());
+	u = 1 - (phi + M_PI) / (2 * M_PI);
+	v = (theta + M_PI / 2) / M_PI;
+}
+
 bool sphere::hit (const ray& r, double t_min, double t_max, hit_record& rec) const {
 	vec3 oc = r.origin() - centre;
 	double a = dot(r.direction(), r.direction());
@@ -25,6 +32,7 @@ bool sphere::hit (const ray& r, double t_min, double t_max, hit_record& rec) con
 		if ( (tmp < t_max) && (tmp > t_min) ) {
 			rec.t = tmp;
 			rec.p = r.point_at_parameter(rec.t);
+			get_sphere_uv((rec.p - centre) / radius, rec.u, rec.v);
 			rec.normal = (rec.p - centre) / radius;
 			rec.mat_ptr = mat_ptr;
 			return true;
@@ -33,6 +41,7 @@ bool sphere::hit (const ray& r, double t_min, double t_max, hit_record& rec) con
 		if ( (tmp < t_max) && (tmp > t_min) ) {
 			rec.t = tmp;
 			rec.p = r.point_at_parameter(rec.t);
+			get_sphere_uv((rec.p -centre) / radius, rec.u, rec.v);
 			rec.normal = (rec.p - centre) / radius;
 			rec.mat_ptr = mat_ptr;
 			return true;
