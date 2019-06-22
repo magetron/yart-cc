@@ -15,7 +15,7 @@
 #include "headers/materials/dielectric.h"
 
 hittable *two_perlin () {
-	texture *noitext = new noise_texture(10);
+	texture *noitext = new noise_texture(0.8);
 	hittable **list = new hittable* [2];
 	list[0] = new sphere(vec3(0, -1000, 0), 1000, new lambertian(noitext));
 	list[1] = new sphere(vec3(0, 2, 0), 2, new lambertian(noitext));
