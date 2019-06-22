@@ -59,7 +59,7 @@ class perlin {
 			for (int i = 0; i < depth; i++) {
 				accum += weight * noise(tmp_p);
 				weight *= 0.5;
-				tmp_p = tmp_p * 2;
+				tmp_p *= 2;
 			}
 			return fabs(accum);
 		}
