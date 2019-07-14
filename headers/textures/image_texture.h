@@ -2,6 +2,7 @@
 #define IMAGE_TEXTURE
 
 #include "../texture.h"
+#include <iostream>
 
 class image_texture : public texture {
 	public :
@@ -19,11 +20,13 @@ vec3 image_texture :: value (double u, double v, const vec3& p) const {
 	if (i < 0) i = 0;
 	if (j < 0) j = 0;
 	if (i > nx - 1) i = nx - 1;
-	if (j > ny - 1) i = ny - 1;
+	if (j > ny - 1) j = ny - 1;
 
 	double r = int(data[3 * i + 3 * nx * j]		) / 255.0;
 	double g = int(data[3 * i + 3 * nx * j + 1] ) / 255.0;
 	double b = int(data[3 * i + 3 * nx * j + 2] ) / 255.0;
+	
+	//std::cout << r << g << b << std::endl;
 
 	return vec3(r, g, b);
 }
