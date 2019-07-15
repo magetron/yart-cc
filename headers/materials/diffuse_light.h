@@ -1,5 +1,7 @@
-#ifndef DIFFUSE_LIGHT
-#define DIFFUSE_LIGHT
+#ifndef DIFFUSE_LIGHTH
+#define DIFFUSE_LIGHTH
+
+#include "../material.h"
 
 class diffuse_light : public material {
 	public :
@@ -11,7 +13,7 @@ class diffuse_light : public material {
 			return emit -> value(u, v, p);
 		}
 		texture *emit;
-}
+};
 
 
 #endif
