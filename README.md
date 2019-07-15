@@ -10,6 +10,10 @@ Thanks to multi-threading, the following results rendering the Cover Scene (MVP 
 * user 50m52.002s
 * sys 0m3.129s
 
+## TODOs
+
+* image mapping to textures
+
 
 ## Showcase
 
