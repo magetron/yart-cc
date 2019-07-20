@@ -14,7 +14,7 @@ class flip_normals : public hittable {
 		}
 
 		virtual bool bounding_box (double t0, double t1, aabb& box) const {
-			return ptr -> bouding_box(t0, t1, box);
+			return ptr -> bounding_box(t0, t1, box);
 		}
 
 		hittable *ptr;
