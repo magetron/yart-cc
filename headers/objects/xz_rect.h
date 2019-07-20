@@ -32,3 +32,4 @@ bool xz_rect::hit (const ray& r, double t0, double t1, hit_record& rec) const {
 	return true;
 }
 
+#endif

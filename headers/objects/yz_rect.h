@@ -10,6 +10,7 @@ class yz_rect : public hittable {
 		virtual bool hit (const ray&r, double t0, double t1, hit_record& rec) const;
 		virtual bool bounding_box (double t0, double t1, aabb& box) const {
 			box = aabb(vec3(k - 0.0001, y0, z0), vec3(k + 0.0001, y1, z1));
+			return true;
 		}
 		
 		material *mp;
