@@ -26,3 +26,5 @@ Thanks to multi-threading, the following results rendering the Cover Scene (MVP 
 MVP 1 : Complete
 
 ![Cover Scene](https://raw.githubusercontent.com/magetron/raytracing-cpp/master/pngs/coverscene.png)
+
+![Cornell Box](https://raw.githubusercontent.com/magetron/yart-cc/master/pngs/cornell-box.png)
