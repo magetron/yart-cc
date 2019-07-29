@@ -19,7 +19,7 @@
 #include "headers/materials/lambertian.h"
 
 hittable *cornell_box () {
-	hittable **list = new hittable*[6];
+	hittable **list = new hittable*[8];
 	int i = 0;
 	material *red 	= new lambertian(new constant_texture(vec3(0.65, 0.05, 0.05)));	
 	material *green = new lambertian(new constant_texture(vec3(0.12, 0.45, 0.15)));
@@ -83,8 +83,8 @@ int main () {
 	freopen("cornell-box-box.ppm", "w", stdout);
 
 	int nx = 400;
-	int ny = 200;
-	int ns = 100;
+	int ny = 400;
+	int ns = 300;
 	int max_thread = 8; // please note: max_thread shall always be a divisor of ny
 
 	std::cout << "P3\n" << nx << " " << ny << "\n255\n";
