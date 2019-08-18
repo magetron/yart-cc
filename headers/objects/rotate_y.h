@@ -1,0 +1,46 @@
+#ifndef ROTATE_Y
+#define ROTATE_Y
+
+#include "../hittable.h"
+#include "math.h"
+
+class rotate_y : public hittable {
+	public:
+		rotate_y (hittable *p, double angle);
+		virtual bool hit (const ray& r, double t_min, double t_max, hit_record& rec) const;
+		virtual bool bounding_box (double t0, double t1, aabb& box) const {
+			box = bbox;
+			return hasbox;
+		}
+		
+		double sin_theta;
+		double cos_theta;
+		bool hasbox;
+		aabb box;
+};
+
+rotate_y::rotate_y (hittable *p, double angle) : ptr(p) {
+	double radians = (M_PI / 180) * angle;
+	sin_theta = sin(radians);
+	cos_theta = cos(radians);
+	hasbox = ptr -> bounding_box(0, 1, bbox);
+	vec3 min(FLT_MAX, FLT_MAX, FLT_MAX);
+	vec3 max(-FLT_MAX, -FLT_MAX, -FLT_MAX);
+	for (int i = 0; i < 2; i++) 
+		for (int j = 0; j < 2; j++) 
+			for (int k = 0; k < 2; k++) {
+				double x = i * bbox.max().x() + (1 - i) * bbox.min().x();
+				double y = j * bbox.max().y() + (1 - j) * bbox.min().y();
+				double z = k * bbox.max().z() + (1 - k) * bbox.min().z();
+				double newx = cos_theta * x + sin_theta * z;
+				double newz = -sin_theta * x + cos_theta * z;
+				vec3 tester(newx, y, newz);
+				for (int c = 0; c < 3; c++) {
+					if (tester[c] > max[c]) max[c] = tester[c];
+					if (tester[c] < min[c]) min[c] = tester[c];
+				}
+			}
+	bbox = aabb(min, max);
+}
+
+#endif
