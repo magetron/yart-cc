@@ -13,10 +13,11 @@ class rotate_y : public hittable {
 			return hasbox;
 		}
 		
+		hittable *ptr;
 		double sin_theta;
 		double cos_theta;
 		bool hasbox;
-		aabb box;
+		aabb bbox;
 };
 
 rotate_y::rotate_y (hittable *p, double angle) : ptr(p) {
@@ -41,6 +42,28 @@ rotate_y::rotate_y (hittable *p, double angle) : ptr(p) {
 				}
 			}
 	bbox = aabb(min, max);
+}
+
+bool rotate_y::hit (const ray& r, double t_min, double t_max, hit_record& rec) const {
+	vec3 origin = r.origin();
+	vec3 direction = r.direction();
+	origin[0] = cos_theta * r.origin()[0] - sin_theta * r.origin()[2];
+	origin[2] = sin_theta * r.origin()[0] + cos_theta * r.origin()[2];
+	direction[0] = cos_theta * r.direction()[0] - sin_theta * r.direction()[2];
+	direction[2] = sin_theta * r.direction()[0] + cos_theta * r.direction()[2];
+	ray rotated_r (origin, direction, r.time());
+	if (ptr -> hit (rotated_r, t_min, t_max, rec)) {
+		vec3 p = rec.p;
+		vec3 normal = rec.normal;
+		p[0] = cos_theta * rec.p[0] + sin_theta * rec.p[2];
+		p[2] = -sin_theta * rec.p[0] + cos_theta * rec.p[2];
+		normal[0] = cos_theta * rec.normal[0] + sin_theta * rec.normal[2];
+		normal[2] = -sin_theta * rec.normal[0] + cos_theta * rec.normal[2];
+		rec.p = p;
+		rec.normal = normal;
+		return true;
+	}
+	return false;
 }
 
 #endif
