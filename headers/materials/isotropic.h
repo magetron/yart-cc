@@ -2,6 +2,7 @@
 #define ISOTROPICH
 
 #include "../material.h"
+#include "lambertian.h"
 
 class isotropic : public material {
 	public:
