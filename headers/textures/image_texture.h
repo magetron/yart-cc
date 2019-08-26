@@ -26,8 +26,6 @@ vec3 image_texture :: value (double u, double v, const vec3& p) const {
 	double g = int(data[3 * i + 3 * nx * j + 1] ) / 255.0;
 	double b = int(data[3 * i + 3 * nx * j + 2] ) / 255.0;
 	
-	//std::cout << r << g << b << std::endl;
-
 	return vec3(r, g, b);
 }
 
