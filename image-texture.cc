@@ -26,8 +26,8 @@ vec3 colour (const ray& r, hittable *world, int depth) {
 		ray scattered;
 		vec3 attenuation;
 		if ( (depth < 50) && (rec.mat_ptr -> scatter(r, rec, attenuation, scattered))  ) 
-			return attenuation;
-				//return attenuation * colour (scattered, world, depth + 1);
+			//return attenuation;
+			return attenuation * colour (scattered, world, depth + 1);
 		else return vec3(0, 0, 0);
 	} else {
 		vec3 unit_direction = unit_vector(r.direction());
