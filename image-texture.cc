@@ -69,10 +69,10 @@ void renderer (int nx, int ny, int ns, int j_max, int j_min, int i_min, int i_ma
 int main () {
 	freopen("image-texture.ppm", "w", stdout);
 
-	int nx = 200;
-	int ny = 100;
-	int ns = 10;
-	int max_thread = 4; // please note: max_thread shall always be a divisor of ny
+	int nx = 1000;
+	int ny = 1000;
+	int ns = 100;
+	int max_thread = 8; // please note: max_thread shall always be a divisor of ny
 
 	std::cout << "P3\n" << nx << " " << ny << "\n255\n";
 
