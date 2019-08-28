@@ -4,10 +4,6 @@
 #include "../material.h"
 #include "lambertian.h"
 
-vec3 reflect (const vec3& v, const vec3& n) {
-	return v - 2 * dot(v, n) * n;
-}
-
 class metal : public material {
 	public : 
 		metal (const vec3& a, double f) : albedo(a) { if (f < 1) fuzz = f; else fuzz = 1; }
