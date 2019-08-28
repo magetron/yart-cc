@@ -24,6 +24,7 @@
 #include "headers/materials/diffuse_light.h"
 #include "headers/materials/dielectric.h"
 #include "headers/materials/lambertian.h"
+#include "headers/materials/metal.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "lib/stb_image.h"
@@ -33,7 +34,7 @@ hittable *coverscene_2 () {
 	hittable **list = new hittable*[30];
 	hittable **boxlist = new hittable*[10000];
 	hittable **boxlist2 = new hittable*[10000];
-	material *white = new lambertian(new constant_texture(vec3(0.75, 0.75, 0.75)));
+	material *white = new lambertian(new constant_texture(vec3(0.73, 0.73, 0.73)));
 	material *ground = new lambertian(new constant_texture(vec3(0.48, 0.83, 0.53)));
 	int b = 0;
 	for (int i = 0; i < nb; i++) 
@@ -49,11 +50,12 @@ hittable *coverscene_2 () {
 		}
 	int l = 0;
 	list[l++] = new bvh_node(boxlist, b, 0, 1);
-	material *light = new diffuse_light(new constant_texture(vec3(7, 7, 7)));
+	material *light = new diffuse_light(new constant_texture(vec3(3.7, 3.7, 3.7)));
 	list[l++] = new xz_rect(123, 423, 147, 412, 554, light);
 	vec3 centre(400, 400, 200);
 	list[l++] = new moving_sphere(centre, centre + vec3(30, 0, 0), 0, 1, 50, new lambertian(new constant_texture(vec3(0.7, 0.3, 0.1))));
-	list[l++] = new sphere(vec3(260, 150, 45), 50, new dielectric(11.5));
+	list[l++] = new sphere(vec3(260, 150, 45), 50, new dielectric(1.5));
+	list[l++] = new sphere(vec3(0, 150, 145), 50, new metal(vec3(0.8, 0.8, 0.9), 10.0));
 	hittable *boundary = new sphere(vec3(360, 150, 145), 70, new dielectric(1.5));
 	list[l++] = boundary;
 	list[l++] = new constant_medium(boundary, 0.2, new constant_texture(vec3(0.2, 0.4, 0.9)));
@@ -79,7 +81,7 @@ vec3 colour (const ray& r, hittable *world, int depth) {
 		vec3 attenuation;
 		vec3 emitted = rec.mat_ptr -> emitted(rec.u, rec.v, rec.p);
 		if ( (depth < 50) && (rec.mat_ptr -> scatter(r, rec, attenuation, scattered))  ) 
-				return emitted + attenuation * colour (scattered, world, depth + 1);
+				return emitted + attenuation * colour(scattered, world, depth + 1);
 		else return emitted;
 	} else return vec3(0, 0, 0);
 }
@@ -105,6 +107,10 @@ void renderer (int nx, int ny, int ns, int j_max, int j_min, int i_min, int i_ma
 			int ig = int (255.99 * col[1]);
 			int ib = int (255.99 * col[2]);
 
+			if (ir > 255) ir = 255;
+			if (ig > 255) ig = 255;
+			if (ib > 255) ib = 255;
+
 			output_img[j][i] = new int [3];
 			output_img[j][i][0] = ir;
 			output_img[j][i][1] = ig;
@@ -119,7 +125,7 @@ int main () {
 
 	int nx = 1000;
 	int ny = 1000;
-	int ns = 1500;
+	int ns = 10000;
 	int max_thread = 8; // please note: max_thread shall always be a divisor of ny
 
 	std::cout << "P3\n" << nx << " " << ny << "\n255\n";
