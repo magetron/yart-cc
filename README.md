@@ -10,11 +10,6 @@ Thanks to multi-threading, the following results rendering the Cover Scene (MVP 
 * user 50m52.002s
 * sys 0m3.129s
 
-## TODOs
-
-* image mapping to textures
-
-
 ## Showcase
 
 ![Matte](https://raw.githubusercontent.com/magetron/raytracing-cpp/master/pngs/matte.png)
@@ -28,3 +23,5 @@ Thanks to multi-threading, the following results rendering the Cover Scene (MVP 
 ![Cornell Box](https://raw.githubusercontent.com/magetron/yart-cc/master/pngs/cornell-box.png)
 
 ![Cornell Box with Boxes](https://raw.githubusercontent.com/magetron/yart-cc/master/pngs/cornell-box-rotate.png)
+
+![Cover Scene 2](https://raw.githubusercontent.com/magetron/yart-cc/master/pngs/coverscene-2.png)
