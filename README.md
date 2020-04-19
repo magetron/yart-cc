@@ -1,4 +1,4 @@
-# Yet Another Ray Tracer
+# Yet Another Ray Tracer (YART)
 
 Incredibly trivial ray-tracer written in plain, understandable C++
 
